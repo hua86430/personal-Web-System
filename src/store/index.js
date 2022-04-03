@@ -1,11 +1,16 @@
 import { createStore } from 'vuex';
 import registerModule from './module/register';
+
 export default createStore({
   state: {
-    test: '1'
+    loading: false
   },
   actions: {},
-  mutations: {},
+  mutations: {
+    isLoading(state, payload) {
+      state.loading = payload;
+    }
+  },
   modules: {
     register: registerModule
   }

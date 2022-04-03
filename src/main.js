@@ -31,9 +31,13 @@ import 'bootstrap/dist/js/bootstrap.min';
 /* Vue Axios & lodash */
 import VueAxios from 'vue-axios';
 import _ from 'lodash';
-import axios from 'axios';
+import axios from '@/plugins/axios';
 /* Vue Axios & lodash */
 
+// components
+import vueLoad from '@/components/plugins/vueLoad.vue';
+
+/* self plugins */
 /* VueX */
 import store from './store';
 /* VueX */
@@ -111,6 +115,7 @@ app.use(Antd);
 app.use(store);
 app.use(VueAxios, axios);
 app.use(useTable);
+app.component('vueLoad', vueLoad);
 app.component('VueLoading', VueLoading);
 app.use(router);
 app.mount('#app');
