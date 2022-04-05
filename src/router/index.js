@@ -3,7 +3,10 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    component: () => import('../views/header.vue')
+    component: () => import('../views/header.vue'),
+    meta: {
+      title: `${import.meta.env.VITE_PAGE_TITLE}首頁`
+    }
   },
   {
     path: '/register',

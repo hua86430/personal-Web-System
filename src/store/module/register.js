@@ -40,13 +40,32 @@ export default {
       });
     },
     signIn(context, data) {
+      toast.clear('');
       const loginData = {
         account: data.account,
         password: data.password
       };
-      axios.post(`${import.meta.env.VITE_API_URL}/myweb/login`, loginData).then(res => {
-        axios.defaults.headers.token = res.data.token;
-        console.log(axios.defaults.headers.token);
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/myweb/login`, loginData)
+          .then(res => {
+            switch (res.data.status) {
+              case false:
+                toast.error('登入失敗，請重新登入。');
+                resolve(false);
+                break;
+              default:
+                const { t, e } = res.data;
+                document.cookie = `token=${t};expires=${new Date(e)}`;
+                toast.success('登入成功！');
+                resolve(true);
+                break;
+            }
+          })
+          .catch(err => {
+            toast.error(err);
+            reject(new Error(false));
+          });
       });
     }
   },

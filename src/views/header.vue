@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-12 header py-2">
+    <div class="col-12 header py-2 px-4">
       <div class="header-content" style="max-width: 1280px; width: 100%">
         <div class="header-icon mr-auto"></div>
         <router-link class="sign-btn" to="register">
@@ -16,8 +16,15 @@
 </template>
 
 <script setup>
-onMounted(() => {
-  console.log(axios.defaults.headers);
+import { useRouter } from 'vue-router';
+import { getExpires } from '@/plugins/getCookie';
+
+const router = useRouter();
+onBeforeMount(() => {
+  const tokenStatus = getExpires('token');
+  if (!tokenStatus) {
+    router.push('register');
+  }
 });
 </script>
 <style lang="scss" scoped>

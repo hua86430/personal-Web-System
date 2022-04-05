@@ -8,6 +8,11 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     host: '0.0.0.0'
+    // 開啟 localhost 端使用 https 協定
+    // https: {
+    //   key: fs.readFileSync(`${__dirname}/static/pem/localhost-key.pem`),
+    //   cert: fs.readFileSync(`${__dirname}/static/pem/localhost.pem`)
+    // }
   },
   define: {
     'process.env': {}
